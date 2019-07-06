@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+
+{% block app_content %}
+
+    <h1> Beklenmeyen bir problem meydana geldi! </h1>
+    <!-- yo bildirilmiyor -->
+    <p> Yönetime hata bildirildi! Yaşadığınız sorun için üzgünüz :( </p>
+    <p><a href="{{ url_for('main.index') }}"> Geri dön </a> </p>
+
+{% endblock %}
+
+

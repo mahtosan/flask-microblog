@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+
+{% block app_content %} 
+
+    {% if current_user.is_anonymous %}
+    <h2> Merhaba Ziyaretçi </h2>
+    {% else %}
+    <h2> Merhaba {{ current_user.username }} </h2>
+    {% endif %}
+    
+    <div>
+        {% if form %}
+        {{ wtf.quick_form(form) }}
+        <br>
+        {% endif %}
+    </div>
+
+    {% for post in posts %}
+    <div>
+        {% include '_post.html' %}
+    </div>
+    {% endfor %}
+    
+    <nav aria-label="...">
+        <ul class="pager">
+            <li class="previous{% if not prev_url %} disabled {% endif %}">
+                <a href="{{ prev_url or '#'}}">
+                    <span aria-hidden='true'>&larr;</span> Yeni postlar
+                </a>
+            </li>
+            <li class="next{% if not next_url %} disabled {% endif %}">
+                <a href="{{ next_url or '#' }}"> Eski postlar
+                <span aria-hidden="true">&rarr;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+{% endblock app_content %}

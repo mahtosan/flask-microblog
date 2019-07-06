@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+
+{% block app_content %}
+
+    <h1> Sayfa bulunamadı </h1>
+    <p> Yönetime hata bildirildi! Yaşadığınız sorun için üzgünüz :( </p>
+    <p><a href="{{ url_for('main.index') }}"> Geri dön </a> </p>
+
+{% endblock %}
+
+

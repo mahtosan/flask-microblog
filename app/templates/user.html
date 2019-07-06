@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+
+{% block app_content %}
+
+    <table class="table table-hover">
+        <tr valign="top">
+            <td width="256px"><img src=" {{ user.avatar(256) }}"></td>
+            <td>
+            <h1> Kullanıcı: {{ user.username }} </h1>
+
+
+            {% if not current_user.is_anonymous %}
+            {% if user == current_user %}
+            <p> <a href="{{ url_for('main.edit_profile') }}"> Profili düzenle! </a> </p>
+            {% elif not current_user.is_following(user) %}
+            <p> <a href="{{ url_for('main.follow', username=user.username) }}"> Takip et! </a></p>
+            {% else %}
+            <p><a href="{{ url_for('main.unfollow', username=user.username) }}"> Takipten çık! </a></p>
+            {% endif %}
+            {% endif %}
+
+
+            {% if user.about_me %} <p> Hakkında: {{ user.about_me }}</p> {% endif %}
+            {% if user.last_seen %}<p> En son {{ moment(user.last_seen).format('LLL') }} tarihinde online oldu!</p> {% endif %}
+            <p> Takipçi sayısı {{ user.followers.count() }}, {{ user.followed.count() }} kişiyi takip ediyor </p>
+
+
+        </td>
+
+        </tr>
+    </table>
+    {% for post in posts %}
+    {% include '_post.html' %}
+    {% endfor %}
+
+
+    
+    <nav aria-label="...">
+        <ul class="pager">
+            <li class="previous{% if not prev_url %} disabled {% endif %}">
+                <a href="{{ prev_url or '#'}}">
+                    <span aria-hidden='true'>&larr;</span> Yeni postlar
+                </a>
+            </li>
+            <li class="next{% if not next_url %} disabled {% endif %}">
+                <a href="{{ next_url or '#' }}"> Eski postlar
+                <span aria-hidden="true">&rarr;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+{% endblock %}

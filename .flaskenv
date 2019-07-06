@@ -1,0 +1,12 @@
+FLASK_APP=microblog.py
+
+FLASK_DEBUG=1
+
+
+MAIL_SERVER=smtp.googlemail.com
+MAIL_PORT=587
+MAIL_USE_TLS=1
+MAIL_USERNAME=sh1ftw14kf@gmail.com
+MAIL_PASSWORD=56146650
+
+ELASTICSEARCH_URL=http://localhost:9200
